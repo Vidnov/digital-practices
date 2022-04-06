@@ -2,21 +2,12 @@
   <div class="container">
     <vHeader @search="searchBlock" @refresh="refresh" />
     <vContent :data="data" @filter="filter" />
-    <div v-if="data.length > 0 && !search" class="pagination-blok">
-      <el-pagination
-        :page-size="1"
-        :pager-count="4"
-        layout="prev, pager, next"
-        :total="pages"
-        @prev-click="prevPage"
-        @next-click="nextPage"
-        @current-change="changePage"
-        :small="small"
-        :disabled="disabled"
-        :background="background"
-        :current-page="Page"
-      />
-    </div>
+    <vFooter
+      v-if="data.length > 0 && !search"
+      :pages="pages"
+      :currentPage="Page"
+      @current-change="changePage"
+    />
   </div>
 </template>
 
@@ -24,6 +15,7 @@
 import axios from "axios";
 import vHeader from "../components/blocks/vHeader.vue";
 import vContent from "../components/blocks/vContent.vue";
+import vFooter from "../components/blocks/vFooter.vue";
 export default {
   name: "App",
   data() {
@@ -32,9 +24,6 @@ export default {
       itemLenta: [],
       itemMos: [],
       Page: 1,
-      small: false,
-      disable: true,
-      background: true,
       search: "",
       Panel: 0,
     };
@@ -42,10 +31,11 @@ export default {
   components: {
     vHeader,
     vContent,
+    vFooter,
   },
   created() {},
   mounted() {
-    console.log(this.$route.query);
+    console.log(process.env);
     const { page, search } = this.$route.query;
     this.search = search;
     if (page) {
@@ -86,12 +76,7 @@ export default {
     changePage(value) {
       this.Page = value;
     },
-    nextPage() {
-      this.Page = this.Page + 1;
-    },
-    prevPage() {
-      this.Page = this.Page - 1;
-    },
+
     //Создаем единый массив данных новостей
     createDataNews() {
       this.dataNews = this.itemLenta.concat(this.itemMos);
