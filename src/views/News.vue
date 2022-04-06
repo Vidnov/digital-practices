@@ -58,8 +58,8 @@ export default {
       if (this.search) {
         arr = arr.filter((el) => {
           if (
-            el?.title?.includes(this.search) ||
-            el?.context?.includes(this.search)
+            el?.title?.toLowerCase().includes(this.search) ||
+            el?.context?.toLowerCase().includes(this.search)
           ) {
             return el;
           }
@@ -110,6 +110,8 @@ export default {
       return this.dataNews;
     },
     async getLenta() {
+      // let { data } = await axios.get(`https://www.mos.ru/rss`);
+
       try {
         let {
           data: {

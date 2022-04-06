@@ -2,8 +2,11 @@
   <div class="item-news-lenta">
     <div class="item-news-lenta__container">
       <div class="item-news-lenta__container__content">
-        <div class="container__image">
+        <div class="container__image" v-if="data.img">
           <img :src="data.img" alt="" :width="200" :height="100" />
+        </div>
+        <div class="container__image" v-else>
+          <img :src="img" alt="" :width="200" :height="100" />
         </div>
         <div class="container__content">
           <h2 class="container__content__h2" @click="more(data.link)">
@@ -24,7 +27,7 @@
 </template>
 
 <script>
-import img from "../../assets/img/test.png";
+import img from "../../assets/img/no-img.png";
 export default {
   name: "itemNewsLenta",
   props: {

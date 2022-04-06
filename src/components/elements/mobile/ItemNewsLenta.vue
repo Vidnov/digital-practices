@@ -1,8 +1,11 @@
 <template>
   <div class="item-news-lenta-mobile">
     <div class="item-news-lenta-mobile__container">
-      <div class="item-news-lenta-mobile__container__image">
+      <div class="item-news-lenta-mobile__container__image" v-if="data.img">
         <img class="news_img" :src="data.img" :height="200" alt="" />
+      </div>
+      <div class="item-news-lenta-mobile__container__image" v-else>
+        <img class="news_img" :src="img" :height="200" alt="" />
       </div>
       <div class="item-news-lenta-mobile__container__content">
         <h2
@@ -28,7 +31,7 @@
 </template>
 
 <script>
-import img from "../../../assets/img/test.png";
+import img from "../../../assets/img/no-img.png";
 export default {
   name: "itemNewsLenta",
   props: {
