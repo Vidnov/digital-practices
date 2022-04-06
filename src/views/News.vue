@@ -16,6 +16,7 @@ import axios from "axios";
 import vHeader from "../components/blocks/vHeader.vue";
 import vContent from "../components/blocks/vContent.vue";
 import vFooter from "../components/blocks/vFooter.vue";
+import { Config } from "../config/config";
 export default {
   name: "App",
   data() {
@@ -116,7 +117,7 @@ export default {
               channel: { item },
             },
           },
-        } = await axios.get("http://localhost:3000/lenta");
+        } = await axios.get(`${Config.serverApi}/lenta`);
 
         item = item.filter((el) => {
           el.site = "www.lenta.ru";
@@ -135,7 +136,7 @@ export default {
               channel: { item },
             },
           },
-        } = await axios.get("http://localhost:3000/mos");
+        } = await axios.get(`${Config.serverApi}/mos`);
         item = item.filter((el) => {
           el.site = "www.mos.ru";
           return el;
